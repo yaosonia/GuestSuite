@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wireframe{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+<div>
+	<h1 style="text-align: center;">Demo Application</h1>
+</div>
+
+<!--affichage des données recupérées dans le controller-->
+<div class="donnees">
+    {%for d in donnees%}
+        <ul>
+        Moyenne sur</br> {{(d.site)}}:{{(d.moy)}}</ul>
+    {%endfor%}
+</div>
+<div class="content">
+    <canvas id="myChart"></canvas>
+</div>
+
+<!--Remplissage de la zone Js-->
+
+<script>
+    var labels = JSON.parse(`{{labels|raw}}`);
+    var data = JSON.parse(`{{data|raw}}`);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script type="text/javascript">
+    var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+
+        labels: labels,//les labels
+        datasets: [{
+            label: 'Graphe',
+            backgroundColor: 'rgba(0, 0, 0,0)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: data// les data
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+
+{% endblock %}
