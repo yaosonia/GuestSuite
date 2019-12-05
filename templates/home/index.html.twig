@@ -4,20 +4,30 @@
 
 {% block body %}
 <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <div>
-	<h1 style="text-align: center;">Demo Application</h1>
+	<h1 style="text-align: center;"><span class="titre">Demo Application</span></h1>
 </div>
 
 <!--affichage des données recupérées dans le controller-->
-<div class="donnees">
-    {%for d in donnees%}
-        <ul>
-        Moyenne sur</br> {{(d.site)}}:{{(d.moy)}}</ul>
-    {%endfor%}
-</div>
 <div class="content">
     <canvas id="myChart"></canvas>
+
+    &nbsp;&nbsp;
+<div class="container">
+    <div class="row">
+        {%for d in donnees%}
+            <div class="donnees col-md-3 offset-md-1 moyenne-site-bloc">
+                Moyenne sur </br>{{(d.site)}}: {{d.moy}}
+            </div>
+        {%endfor%}
+    </div>
 </div>
+</div>
+
+
+
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 
 <!--Remplissage de la zone Js-->
 
